@@ -1,0 +1,32 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "isbn": "978014",
+      "titulo": "Clean Code",
+      "autor": "Robert C. Martin",
+      "categoria": "Software",
+      "anio": "2008",
+      "cantidad_total": 5,
+      "cantidad_disponible": 2
+    },
+    {
+      "id": "2937",
+      "isbn": "12345678",
+      "titulo": "prueba",
+      "autor": "MateoM",
+      "categoria": "terror",
+      "anio": "2024",
+      "cantidad_total": 1,
+      "portada_url": "",
+      "descripcion": ""
+    }
+  ],
+  "stats": {
+    "totalLibros": 120,
+    "disponibles": 80,
+    "prestados": 40,
+    "prestamosActivos": 35,
+    "reservas": 12
+  }
+}

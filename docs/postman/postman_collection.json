@@ -1,0 +1,50 @@
+{
+  "info": {
+    "name": "SGBD-Grupo5-Integracion",
+    "_postman_id": "12345678-abcd-efgh-ijkl-123456789000",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+
+  "item": [
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\":\"test@test.com\", \"password\":\"123456\"}"
+        }
+      }
+    },
+    {
+      "name": "Listar Libros",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/libros"
+      }
+    },
+    {
+      "name": "Detalle Libro",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/libros/:id"
+      }
+    },
+    {
+      "name": "Solicitar Préstamo",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/prestamos",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"usuarioId\": 1, \"libroId\": 10}"
+        }
+      }
+    }
+  ],
+
+  "variable": [
+    { "key": "baseUrl", "value": "https://backend-integracion/api" }
+  ]
+}
