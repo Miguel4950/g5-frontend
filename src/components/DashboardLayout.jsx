@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../store/authSlice";
-import TopBar from "./TopBar";
 
 const roleLabels = {
   1: "Estudiante",
@@ -26,33 +25,30 @@ export default function DashboardLayout({ title, subtitle, actions, children }) 
   };
 
   return (
-    <>
-      <TopBar />
-      <div className="dashboard-shell">
-        <header className="dashboard-header">
+    <div className="dashboard-shell">
+      <header className="dashboard-header">
+        <div>
+          <p className="dashboard-back">
+            <button onClick={() => navigate(-1)}>← Volver</button>
+          </p>
+          <h1>{title}</h1>
+          {subtitle && <p className="muted">{subtitle}</p>}
+        </div>
+        <div className="dashboard-user">
           <div>
-            <p className="dashboard-back">
-              <button onClick={() => navigate(-1)}>← Volver</button>
-            </p>
-            <h1>{title}</h1>
-            {subtitle && <p className="muted">{subtitle}</p>}
+            <span className="muted">Sesión</span>
+            <strong>{user?.nombre}</strong>
+            <span className="badge">{roleName}</span>
           </div>
-          <div className="dashboard-user">
-            <div>
-              <span className="muted">Sesión</span>
-              <strong>{user?.nombre}</strong>
-              <span className="badge">{roleName}</span>
-            </div>
-            <button className="ghost" onClick={handleLogout}>
-              Cerrar sesión
-            </button>
-          </div>
-        </header>
+          <button className="ghost" onClick={handleLogout}>
+            Cerrar sesión
+          </button>
+        </div>
+      </header>
 
-        {actions && <div className="dashboard-actions">{actions}</div>}
+      {actions && <div className="dashboard-actions">{actions}</div>}
 
-        <main className="dashboard-content">{children}</main>
-      </div>
-    </>
+      <main className="dashboard-content">{children}</main>
+    </div>
   );
 }
