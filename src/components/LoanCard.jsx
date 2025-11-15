@@ -1,4 +1,4 @@
-export default function LoanCard({ loan }) {
+export default function LoanCard({ loan, actions }) {
   const libro = loan.libro || loan.book || {};
   const fechaSolicitud =
     loan.fecha_prestamo || loan.fechaSolicitud || loan.createdAt;
@@ -7,10 +7,7 @@ export default function LoanCard({ loan }) {
   const estado = loan.estado || loan.estadoNombre || loan.status || "pendiente";
 
   return (
-    <div
-      className="loan-card"
-      style={{ border: "1px solid #ddd", padding: 12, borderRadius: 6, marginBottom: 8 }}
-    >
+    <div className="loan-card">
       <h4>{libro.titulo || loan.titulo || "Título desconocido"}</h4>
       <p>
         <strong>Autor:</strong> {libro.autor || loan.autor || "Sin autor"}
@@ -25,9 +22,10 @@ export default function LoanCard({ loan }) {
           {new Date(fechaDevolucion).toLocaleDateString()}
         </p>
       )}
-      <p>
+      <p className={`status status-${String(estado).toLowerCase()}`}>
         <strong>Estado:</strong> {estado}
       </p>
+      {actions && <div className="loan-card-actions">{actions}</div>}
     </div>
   );
 }
