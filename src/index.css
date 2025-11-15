@@ -189,9 +189,19 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 8%;
-  background: #111a3a;
+  padding: 18px 6%;
+  background: linear-gradient(120deg, #0c1445, #131c61);
   color: #fff;
+  box-shadow: 0 3px 12px rgba(7, 10, 40, 0.5);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .topbar-logo {
@@ -201,11 +211,28 @@ body {
 .topbar-logo span {
   display: block;
   font-size: 0.85rem;
-  color: #a5b4fc;
+  color: #bec6ff;
 }
 
-.topbar-actions button {
-  margin-left: 8px;
+.topbar-nav button {
+  margin-left: 10px;
+  border: 1px solid transparent;
+  padding: 8px 16px;
+}
+
+.topbar-nav button.active {
+  background: #fff;
+  color: #111a3a;
+  border-color: #fff;
+}
+
+.back-button {
+  color: #111a3a;
+  background: #ffffff;
+  border: 1px solid #bcc4ff;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 600;
 }
 
 .catalog-shell,
@@ -285,6 +312,30 @@ body {
   color: #d32f2f;
 }
 
+.book-hero {
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 0 16px 48px;
+}
+
+.book-detail-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  padding: 32px;
+}
+
+.book-detail-card h2 {
+  margin-bottom: 4px;
+}
+
+.book-detail-meta {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .page {
   max-width: 960px;
   margin: 0 auto;
@@ -303,4 +354,8 @@ body {
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.topbar-nav {
+  display: flex;
+  align-items: center;
 }

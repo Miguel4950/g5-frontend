@@ -50,9 +50,11 @@ export default function DashboardLayout({ title, subtitle, actions, children }) 
 
       <nav className="dashboard-nav">
         <button onClick={() => navigate("/catalog")}>Catálogo</button>
-        <button onClick={() => navigate("/student/dashboard")}>
-          Panel estudiante
-        </button>
+        {!isStaff && (
+          <button onClick={() => navigate("/student/dashboard")}>
+            Panel estudiante
+          </button>
+        )}
         {isStaff && (
           <button onClick={() => navigate("/librarian/dashboard")}>
             Panel bibliotecario

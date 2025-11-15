@@ -37,25 +37,20 @@ export default function BookDetail() {
 
   return (
     <>
-      <TopBar />
-      <div className="page">
-        <div className="card">
+      <TopBar showBack />
+      <section className="book-hero">
+        <div className="book-detail-card">
           <h2>{book.titulo}</h2>
-          <p>
-            <strong>Autor:</strong> {book.autor}
-          </p>
-          <p>
-            <strong>Descripción:</strong> {book.descripcion}
-          </p>
-          <p>
-            <strong>Disponibles:</strong> {book.cantidadDisponible}
-          </p>
-
-          <button onClick={handleRequestLoan} disabled={loansLoading}>
-            {loansLoading ? "Enviando..." : "Solicitar préstamo"}
-          </button>
+          <p className="muted">{book.autor}</p>
+          <p>{book.descripcion}</p>
+          <div className="book-detail-meta">
+            <span>Disponibles: {book.cantidadDisponible}</span>
+            <button onClick={handleRequestLoan} disabled={loansLoading}>
+              {loansLoading ? "Enviando..." : "Solicitar préstamo"}
+            </button>
+          </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }
