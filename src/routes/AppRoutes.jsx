@@ -46,7 +46,7 @@ export default function AppRoutes() {
           <Route path="/student/dashboard" element={<StudentDashboard />} />
 
           {/* Dashboard del bibliotecario */}
-          <Route element={<RoleRoute allowedRoles={['librarian']}/>}>
+          <Route element={<RoleRoute allowedRoles={['librarian','admin']}/>}>
             <Route path="/librarian/dashboard" element={<LibrarianDashboard />} />
           </Route>
 

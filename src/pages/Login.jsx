@@ -14,13 +14,27 @@ export default function Login() {
     setError("");
     try {
       const res = await authApi.post("/login", { username, contrasena });
-      dispatch(
-        loginSuccess({
-          token: res.data.token,
-          user: res.data.usuario_info,
-        })
-      );
-      window.location.href = "/student/dashboard";
+      const payload = {
+        token: res.data.token,
+        user: res.data.usuario_info,
+      };
+      dispatch(loginSuccess(payload));
+
+      const roleMap = {
+        1: "student",
+        2: "librarian",
+        3: "admin",
+      };
+      const role =
+        roleMap[payload.user?.id_tipo_usuario] ||
+        payload.user?.rol ||
+        payload.user?.role ||
+        "student";
+      const target =
+        role === "librarian" || role === "admin"
+          ? "/librarian/dashboard"
+          : "/student/dashboard";
+      window.location.href = target;
     } catch (err) {
       setError("Credenciales incorrectas");
     }
