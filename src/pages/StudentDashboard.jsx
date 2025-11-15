@@ -35,7 +35,7 @@ export default function StudentDashboard() {
         loansApi.get("/my-loans"),
       ]);
       setBooks(normalizeArray(booksRes.data));
-      setLoans(normalizeArray(loansRes.data));
+      setLoans(normalizeArray(loansRes.data?.prestamos_activos));
     } catch (error) {
       setMessage("No pudimos cargar el panel. Intenta nuevamente.");
     } finally {
