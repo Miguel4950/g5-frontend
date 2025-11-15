@@ -194,6 +194,7 @@ export default function StudentDashboard() {
                 <LoanCard
                   key={loan.id || loan.id_prestamo}
                   loan={loan}
+                  borrowerInfo={{ nombre: user?.nombre }}
                   actions={renderLoanActions(loan)}
                 />
               ))
