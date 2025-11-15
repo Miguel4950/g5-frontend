@@ -123,13 +123,17 @@ export default function LibrarianDashboard() {
             {pending.length === 0 ? (
               <p className="muted">No hay solicitudes por aprobar.</p>
             ) : (
-              pending.map((loan) => (
-                <LoanCard
-                  key={loan.id || loan.id_prestamo}
-                  loan={loan}
-                  actions={renderPendingActions(loan)}
-                />
-              ))
+              pending.map((loan) => {
+                const prestamo = loan.prestamo || loan;
+                return (
+                  <LoanCard
+                    key={prestamo.id || prestamo.id_prestamo}
+                    loan={prestamo}
+                    borrowerInfo={loan.usuario}
+                    actions={renderPendingActions(prestamo)}
+                  />
+                );
+              })
             )}
           </section>
 
@@ -145,13 +149,17 @@ export default function LibrarianDashboard() {
             {active.length === 0 ? (
               <p className="muted">No hay préstamos activos actualmente.</p>
             ) : (
-              active.map((loan) => (
-                <LoanCard
-                  key={loan.id || loan.id_prestamo}
-                  loan={loan}
-                  actions={renderReturnAction(loan)}
-                />
-              ))
+              active.map((loan) => {
+                const prestamo = loan.prestamo || loan;
+                return (
+                  <LoanCard
+                    key={prestamo.id || prestamo.id_prestamo}
+                    loan={prestamo}
+                    borrowerInfo={loan.usuario}
+                    actions={renderReturnAction(prestamo)}
+                  />
+                );
+              })
             )}
           </section>
 
@@ -167,13 +175,17 @@ export default function LibrarianDashboard() {
             {overdue.length === 0 ? (
               <p className="muted">No hay préstamos vencidos. ¡Excelente!</p>
             ) : (
-              overdue.map((loan) => (
-                <LoanCard
-                  key={loan.id || loan.id_prestamo}
-                  loan={loan}
-                  actions={renderReturnAction(loan)}
-                />
-              ))
+              overdue.map((loan) => {
+                const prestamo = loan.prestamo || loan;
+                return (
+                  <LoanCard
+                    key={prestamo.id || prestamo.id_prestamo}
+                    loan={prestamo}
+                    borrowerInfo={loan.usuario}
+                    actions={renderReturnAction(prestamo)}
+                  />
+                );
+              })
             )}
           </section>
         </>

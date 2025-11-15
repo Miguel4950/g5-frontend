@@ -3,22 +3,16 @@ import { catalogApi } from "../services/api";
 
 const bookCache = new Map();
 
-export default function LoanCard({ loan, actions }) {
+export default function LoanCard({ loan, borrowerInfo, actions }) {
   const [remoteBook, setRemoteBook] = useState(null);
-  const normalizedLoan = loan.prestamo || loan;
-  const libro = remoteBook || normalizedLoan.libro || normalizedLoan.book || {};
+  const libro = remoteBook || loan.libro || loan.book || {};
   const fechaSolicitud =
-    normalizedLoan.fecha_prestamo ||
-    normalizedLoan.fechaSolicitud ||
-    normalizedLoan.createdAt;
+    loan.fecha_prestamo || loan.fechaSolicitud || loan.createdAt;
   const fechaDevolucion =
-    normalizedLoan.fecha_devolucion_esperada ||
-    normalizedLoan.fechaDevolucion ||
-    null;
-  const estado =
-    normalizedLoan.estado || normalizedLoan.estadoNombre || normalizedLoan.status || "pendiente";
+    loan.fecha_devolucion_esperada || loan.fechaDevolucion || null;
+  const estado = loan.estado || loan.estadoNombre || loan.status || "pendiente";
 
-  const bookId = normalizedLoan.id_libro || normalizedLoan.bookId || libro.id;
+  const bookId = loan.id_libro || loan.bookId || libro.id;
 
   useEffect(() => {
     if ((libro && libro.titulo) || !bookId) return;
@@ -41,11 +35,10 @@ export default function LoanCard({ loan, actions }) {
   }, [bookId, libro?.titulo]);
 
   const borrower =
-    loan?.usuario?.nombre ||
-    normalizedLoan.usuario?.nombre ||
-    loan?.usuarioNombre ||
-    normalizedLoan.nombre_usuario ||
-    (normalizedLoan.id_usuario ? `Usuario #${normalizedLoan.id_usuario}` : "Desconocido");
+    borrowerInfo?.nombre ||
+    loan.usuario?.nombre ||
+    loan.nombre_usuario ||
+    (loan.id_usuario ? `Usuario #${loan.id_usuario}` : "Desconocido");
 
   return (
     <div className="loan-card">
