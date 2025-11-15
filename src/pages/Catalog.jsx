@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { catalogApi } from "../services/api";
 import Loader from "../components/Loader";
 import BookCard from "../components/BookCard";
@@ -11,6 +12,7 @@ export default function Catalog() {
   const [term, setTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -38,6 +40,18 @@ export default function Catalog() {
 
   if (loading) return <Loader />;
 
+  const goToPanel = () => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    if (user.id_tipo_usuario === 2 || user.id_tipo_usuario === 3) {
+      navigate("/librarian/dashboard");
+    } else {
+      navigate("/student/dashboard");
+    }
+  };
+
   return (
     <>
       <TopBar />
@@ -51,7 +65,9 @@ export default function Catalog() {
               buscador para localizar tu libro favorito.
             </p>
           </div>
-          <button onClick={() => navigate("/login")}>Iniciar sesión</button>
+          <button onClick={goToPanel}>
+            {user ? "Ir a mi panel" : "Iniciar sesión"}
+          </button>
         </div>
 
         <div className="card">
