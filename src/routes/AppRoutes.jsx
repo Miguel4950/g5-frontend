@@ -5,6 +5,7 @@ import RoleRoute from "./RoleRoute";
 // Páginas públicas
 import Catalog from "../pages/Catalog";
 import BookDetail from "../pages/BookDetail";
+import Landing from "../pages/Landing";
 
 // Páginas de autenticación (las agregarás luego)
 import Login from "../pages/Login";
@@ -13,9 +14,6 @@ import Register from "../pages/Register";
 // Dashboards
 import StudentDashboard from "../pages/StudentDashboard";
 import LibrarianDashboard from "../pages/LibrarianDashboard";
-
-// Componentes comunes
-import Loader from "../components/Loader";
 
 export default function AppRoutes() {
   return (
@@ -26,7 +24,7 @@ export default function AppRoutes() {
         {/*  RUTAS PÚBLICAS                  */}
         {/* ---------------------------------- */}
 
-        <Route path="/" element={<Catalog />} />
+        <Route path="/" element={<Landing />} />
 
         <Route path="/catalog" element={<Catalog />} />
 

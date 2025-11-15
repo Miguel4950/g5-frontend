@@ -1,13 +1,18 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
 import { loginSuccess } from "../store/authSlice";
 import { authApi } from "../services/api";
+import { resolveRole } from "../utils/roleUtils";
+import TopBar from "../components/TopBar";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [contrasena, setContrasena] = useState("");
   const [error, setError] = useState("");
+  const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,49 +24,57 @@ export default function Login() {
         user: res.data.usuario_info,
       };
       dispatch(loginSuccess(payload));
-
-      const roleMap = {
-        1: "student",
-        2: "librarian",
-        3: "admin",
-      };
-      const role =
-        roleMap[payload.user?.id_tipo_usuario] ||
-        payload.user?.rol ||
-        payload.user?.role ||
-        "student";
+      const role = resolveRole(payload.user);
       const target =
         role === "librarian" || role === "admin"
           ? "/librarian/dashboard"
           : "/student/dashboard";
-      window.location.href = target;
+      navigate(target);
     } catch (err) {
       setError("Credenciales incorrectas");
     }
   };
 
+  if (token) {
+    navigate("/student/dashboard");
+  }
+
   return (
-    <div className="page">
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Usuario"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={contrasena}
-          onChange={(e) => setContrasena(e.target.value)}
-        />
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <button type="submit">Ingresar</button>
-      </form>
-      <p>
-        ¿No tienes cuenta? <a href="/register">Registrarse</a>
-      </p>
-    </div>
+    <>
+      <TopBar />
+      <section className="auth-shell">
+        <div className="auth-card">
+          <h2>Iniciar sesión</h2>
+          <p className="muted">
+            Gestiona tus préstamos y solicita nuevos libros desde aquí.
+          </p>
+          <form onSubmit={handleSubmit} className="auth-form">
+            <label>
+              Usuario
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Ingresa tu usuario"
+              />
+            </label>
+            <label>
+              Contraseña
+              <input
+                type="password"
+                value={contrasena}
+                onChange={(e) => setContrasena(e.target.value)}
+                placeholder="********"
+              />
+            </label>
+            {error && <p className="error-text">{error}</p>}
+            <button type="submit">Entrar</button>
+          </form>
+          <p className="muted">
+            ¿No tienes cuenta? <Link to="/register">Crear una cuenta</Link>
+          </p>
+        </div>
+      </section>
+    </>
   );
 }

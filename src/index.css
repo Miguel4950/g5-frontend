@@ -185,6 +185,106 @@ body {
   margin-bottom: 8px;
 }
 
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 8%;
+  background: #111a3a;
+  color: #fff;
+}
+
+.topbar-logo {
+  cursor: pointer;
+}
+
+.topbar-logo span {
+  display: block;
+  font-size: 0.85rem;
+  color: #a5b4fc;
+}
+
+.topbar-actions button {
+  margin-left: 8px;
+}
+
+.catalog-shell,
+.hero,
+.auth-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px 48px;
+}
+
+.catalog-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero-card,
+.hero-panel {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.1);
+}
+
+.hero-actions button {
+  margin-right: 12px;
+}
+
+.hero-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-panel li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eceff1;
+}
+
+.auth-shell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.auth-card {
+  background: #fff;
+  padding: 32px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.auth-form input {
+  margin-top: 4px;
+}
+
+.error-text {
+  color: #d32f2f;
+}
+
 .page {
   max-width: 960px;
   margin: 0 auto;

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { catalogApi } from "../services/api";
 import Loader from "../components/Loader";
 import { requestLoan } from "../store/loansSlice";
+import TopBar from "../components/TopBar";
 
 export default function BookDetail() {
   const { id } = useParams();
@@ -35,21 +36,26 @@ export default function BookDetail() {
   };
 
   return (
-    <div className="page">
-      <h2>{book.titulo}</h2>
-      <p>
-        <strong>Autor:</strong> {book.autor}
-      </p>
-      <p>
-        <strong>Descripción:</strong> {book.descripcion}
-      </p>
-      <p>
-        <strong>Disponibles:</strong> {book.cantidadDisponible}
-      </p>
+    <>
+      <TopBar />
+      <div className="page">
+        <div className="card">
+          <h2>{book.titulo}</h2>
+          <p>
+            <strong>Autor:</strong> {book.autor}
+          </p>
+          <p>
+            <strong>Descripción:</strong> {book.descripcion}
+          </p>
+          <p>
+            <strong>Disponibles:</strong> {book.cantidadDisponible}
+          </p>
 
-      <button onClick={handleRequestLoan} disabled={loansLoading}>
-        {loansLoading ? "Enviando..." : "Solicitar Préstamo"}
-      </button>
-    </div>
+          <button onClick={handleRequestLoan} disabled={loansLoading}>
+            {loansLoading ? "Enviando..." : "Solicitar préstamo"}
+          </button>
+        </div>
+      </div>
+    </>
   );
 }
