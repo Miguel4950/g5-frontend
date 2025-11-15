@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../components/DashboardLayout";
 import BookCard from "../components/BookCard";
@@ -15,6 +16,7 @@ const normalizeArray = (payload) => {
 };
 
 export default function StudentDashboard() {
+  const user = useSelector((state) => state.auth.user);
   const [books, setBooks] = useState([]);
   const [loans, setLoans] = useState([]);
   const [search, setSearch] = useState("");
@@ -22,11 +24,10 @@ export default function StudentDashboard() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    loadData();
-  }, []);
+  const isStaff =
+    user && (user.id_tipo_usuario === 2 || user.id_tipo_usuario === 3);
 
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     setLoading(true);
     setMessage("");
     try {
@@ -41,7 +42,15 @@ export default function StudentDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (isStaff) {
+      navigate("/librarian/dashboard", { replace: true });
+      return;
+    }
+    loadData();
+  }, [isStaff, loadData, navigate]);
 
   const filteredBooks = useMemo(() => {
     return books.filter((b) =>
